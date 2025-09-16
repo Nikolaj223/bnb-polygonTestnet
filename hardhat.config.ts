@@ -9,20 +9,23 @@ const bscTestnetRpcUrl = process.env.BSC_TESTNET_RPC_URL || "";
 const polygonTestnetRpcUrl = process.env.POLYGON_TESTNET_RPC_URL || "";
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.28",
+  solidity: {
+    compilers: [
+      { version: "0.8.20" }, // Для Bridge.sol и контрактов OpenZeppelin
+      { version: "0.8.0" }   // Для SimpleStorage.sol
+    ]
+  },
   networks: {
-    bscTestnet: { // Добавляем конфигурацию для BSC Testnet
+    bscTestnet: { // конфигурация для BSC Testnet
       url: bscTestnetRpcUrl,
       chainId: 97,
       gasPrice: 20000000000,
       accounts: bscTestnetPrivateKey ? [bscTestnetPrivateKey] : [],
     },
-    polygonTestnet: { // Добавляем конфигурацию для Polygon Testnet
+    polygonTestnet: { // конфигурация для Polygon Testnet
       url: polygonTestnetRpcUrl,
       chainId: 80002,
       accounts: polygonTestnetPrivateKey ? [polygonTestnetPrivateKey] : [],
     },
   },
 };
-
-export default config;

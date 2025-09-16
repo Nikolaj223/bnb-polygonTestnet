@@ -26,3 +26,4 @@ describe("SimpleStorage", function () {
     expect(storedData).to.equal(newValue);
   });
 });
+
